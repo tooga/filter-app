@@ -13,11 +13,13 @@ interface AppState {
     xPos: number,
     yPos: number,
   },
-  originalImg: string,
-  thumbnailImg: string,
-  filteredImg: string,
-  enhancedImg: string,
-  activeImg: string,
+  userImg: {
+    originalImg: string,
+    thumbnailImg: string,
+    filteredImg: string,
+    enhancedImg: string,
+    activeImg: string,
+  },
 }
 
 class App extends React.Component<{}, AppState> {
@@ -32,20 +34,22 @@ class App extends React.Component<{}, AppState> {
         xPos: 0,
         yPos: 0,
       },
-      originalImg: startPic,
-      thumbnailImg: startThumb,
-      filteredImg: startPic,
-      enhancedImg: '',
-      activeImg: startPic,
+      userImg: {
+        originalImg: startPic,
+        thumbnailImg: startThumb,
+        filteredImg: startPic,
+        enhancedImg: '',
+        activeImg: startPic,
+      },
     };
   }
 
   render() {
     return (
       <div className="app">
-        <div className="img-container" style={{ backgroundImage: `url(${this.state.activeImg})`}}>
+        <div className="img-container" style={{ backgroundImage: `url(${this.state.userImg.activeImg})`}}>
         </div>
-        <TabBar />
+        <TabBar userImg={this.state.userImg}/>
       </div>
     );
   }

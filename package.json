@@ -7,10 +7,14 @@
     "@types/node": "^9.6.0",
     "@types/react": "^16.0.41",
     "@types/react-dom": "^16.0.4",
+    "@types/webpack-env": "^1.13.5",
     "react-scripts-ts": "2.14.0",
     "typescript": "^2.7.2"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "caman": "^4.1.2",
+    "jdataview": "^2.5.0",
     "node-sass-chokidar": "^1.2.1",
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",

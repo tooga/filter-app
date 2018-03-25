@@ -1,8 +1,18 @@
 import * as React from 'react';
 
-class EditBar extends React.Component<{}, {}> {
+interface EditBarProps {
+    userImg: {
+        originalImg: string,
+        thumbnailImg: string,
+        filteredImg: string,
+        enhancedImg: string,
+        activeImg: string,
+    }
+}
 
-    constructor(props: {}) {
+class EditBar extends React.Component<EditBarProps, {}> {
+
+    constructor(props: EditBarProps) {
         super(props);
     }
 

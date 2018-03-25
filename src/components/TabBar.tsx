@@ -5,13 +5,23 @@ import '../styles/TabBar.css';
 
 type tabs = 'filter' | 'edit';
 
+interface TabBarProps {
+    userImg: {
+        originalImg: string,
+        thumbnailImg: string,
+        filteredImg: string,
+        enhancedImg: string,
+        activeImg: string,
+    }
+}
+
 interface TabBarState {
     activeTab: tabs,
 }
 
-class TabBar extends React.Component<{}, TabBarState> {
+class TabBar extends React.Component<TabBarProps, TabBarState> {
 
-    constructor(props: {}) {
+    constructor(props: TabBarProps) {
         super(props);
         this.state = {
             activeTab: 'filter',
@@ -26,7 +36,10 @@ class TabBar extends React.Component<{}, TabBarState> {
 
     render() {
         const activeTab = this.state.activeTab;
-        const tabContent = activeTab === 'filter' ? <FilterBar /> : <EditBar />;
+        const tabContent = activeTab === 'filter' ?
+            <FilterBar userImg={this.props.userImg} />
+            :
+            <EditBar userImg={this.props.userImg} />;
         return (
             <div className="tab-bar">
                 <div className="tabs">
