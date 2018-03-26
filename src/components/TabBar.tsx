@@ -12,7 +12,8 @@ interface TabBarProps {
         filteredImg: string,
         enhancedImg: string,
         activeImg: string,
-    }
+    },
+    updateImage: (src: string) => void,
 }
 
 interface TabBarState {
@@ -36,10 +37,6 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
 
     render() {
         const activeTab = this.state.activeTab;
-        const tabContent = activeTab === 'filter' ?
-            <FilterBar userImg={this.props.userImg} />
-            :
-            <EditBar userImg={this.props.userImg} />;
         return (
             <div className="tab-bar">
                 <div className="tabs">
@@ -47,7 +44,12 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
                     <div className={'tab ' + (activeTab === 'edit' ? 'active' : '')} onClick={() => this.setActiveTab('edit')}>Edit</div>
                 </div>
                 <div className="tab-content">
-                    {tabContent}
+                    <div className={activeTab !== 'filter' ? 'hidden' : ''}>
+                        <FilterBar userImg={this.props.userImg} updateImage={(src: string) => this.props.updateImage(src)}/>
+                    </div>
+                    <div className={activeTab !== 'edit' ? 'hidden' : ''}>
+                        <EditBar userImg={this.props.userImg} />
+                    </div>
                 </div>
             </div>
         );

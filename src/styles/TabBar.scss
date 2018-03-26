@@ -19,5 +19,8 @@
     }
     .tab-content {
         flex: 1 1 120px;
+        .hidden {
+            display: none;
+        }
     }
 }

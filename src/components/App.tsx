@@ -26,6 +26,7 @@ class App extends React.Component<{}, AppState> {
 
   constructor(props: AppState) {
     super(props);
+    this.updateImage = this.updateImage.bind(this);
     this.state = {
       fitToScreen: false,
       dimensions: {
@@ -44,12 +45,20 @@ class App extends React.Component<{}, AppState> {
     };
   }
 
+  updateImage(src: string) {
+    const userImg = this.state.userImg;
+    userImg.activeImg = src;
+    this.setState({
+      userImg,
+    });
+  }
+
   render() {
     return (
       <div className="app">
         <div className="img-container" style={{ backgroundImage: `url(${this.state.userImg.activeImg})`}}>
         </div>
-        <TabBar userImg={this.state.userImg}/>
+        <TabBar updateImage={this.updateImage} userImg={this.state.userImg}/>
       </div>
     );
   }

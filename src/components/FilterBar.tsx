@@ -14,7 +14,8 @@ interface FilterBarProps {
         filteredImg: string,
         enhancedImg: string,
         activeImg: string,
-    }
+    },
+    updateImage: (src: string) => void,
 }
 
 interface FilterBarState {
@@ -85,8 +86,15 @@ class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
     }
 
     onThumbnailClick(filterName: string) {
+        this.applyFilter(filterName);
         this.setState({
             activeFilter: filterName,
+        });
+    }
+
+    applyFilter(filterName: string) {
+        filterImage(this.props.userImg.originalImg, filterName, (src) => {
+            this.props.updateImage(src);
         });
     }
 
