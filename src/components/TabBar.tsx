@@ -14,6 +14,7 @@ interface TabBarProps {
         activeImg: string,
     },
     updateImage: (src: string) => void,
+    enhanceImage: (src: string) => void,
 }
 
 interface TabBarState {
@@ -48,7 +49,7 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
                         <FilterBar userImg={this.props.userImg} updateImage={(src: string) => this.props.updateImage(src)}/>
                     </div>
                     <div className={activeTab !== 'edit' ? 'hidden' : ''}>
-                        <EditBar userImg={this.props.userImg} />
+                        <EditBar userImg={this.props.userImg} updateImage={(src: string) => this.props.enhanceImage(src)}/>
                     </div>
                 </div>
             </div>

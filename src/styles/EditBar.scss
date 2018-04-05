@@ -1,0 +1,127 @@
+@import 'variables.scss';
+@import 'inputRange.scss';
+
+.edit-bar-container {
+    height: 100%;
+
+    .enhancements {
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 0 5px;
+      overflow-x: scroll;
+
+      .enhancement-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 5px 10px 5px;
+
+        .enhancement-icon-container {
+          width: 70px;
+          height: 70px;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+          border-radius: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $white;
+          box-shadow: 0px 0px 0px 1px rgba(255,255,255,0.8);
+
+          i.material-icons {
+            font-size: 2.5em;
+          }
+
+          &.active {
+            box-shadow: inset 0px 0px 5px 3px $lightBlue;
+          }
+
+          &.active + .enhancement-name {
+            color: $white;
+          }
+        }
+
+        .enhancement-name {
+          margin-top: 10px;
+          line-height: 1;
+          font-size: 10px;
+          height: 20px;
+          text-align: center;
+          display: flex;
+          align-items: flex-start;
+          color: $lightGray;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+
+  .edit-slider-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px 20px;
+
+    .range-field {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        flex: 1;
+        margin: 0 0 10px 0;
+
+        input[type=range] {
+          height: 20px;
+          border: none;
+          margin-top: 0;
+          margin-bottom: 0;
+          -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+        }
+
+        .thumb {
+          margin-top: 0;
+          top: -10px !important;
+          background: transparent;
+        }
+      }
+
+    .slider-btn-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+
+      .title-container {
+        display: flex;
+        flex-direction: column;
+
+        .enhancement-title {
+          text-transform: capitalize;
+          text-align: center;
+          color: $white;
+          margin-top: 5px;
+          height: 20px;
+          line-height: 20px;
+        }
+
+        .reset-btn {
+          margin: 0px auto 5px auto;
+          height: 20px;
+          line-height: 20px;
+          background: transparent;
+          border-radius: 15px;
+          color: $white;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          font-size: 12px;
+          padding: 0 1.5rem;
+        }
+      }
+
+      .slider-icon {
+        color: $white;
+        font-size: 3rem;
+      }
+    }
+
+  }
