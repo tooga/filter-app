@@ -4,20 +4,20 @@
 .edit-bar-container {
     height: 100%;
 
-    .enhancements {
+    .edits {
       display: flex;
       flex-flow: row nowrap;
       padding: 0 5px;
       overflow-x: scroll;
 
-      .enhancement-container {
+      .edit-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: 15px 5px 10px 5px;
 
-        .enhancement-icon-container {
+        .edit-icon-container {
           width: 70px;
           height: 70px;
           display: flex;
@@ -38,12 +38,12 @@
             box-shadow: inset 0px 0px 5px 3px $lightBlue;
           }
 
-          &.active + .enhancement-name {
+          &.active + .edit-name {
             color: $white;
           }
         }
 
-        .enhancement-name {
+        .edit-name {
           margin-top: 10px;
           line-height: 1;
           font-size: 10px;
@@ -96,7 +96,7 @@
         display: flex;
         flex-direction: column;
 
-        .enhancement-title {
+        .edit-title {
           text-transform: capitalize;
           text-align: center;
           color: $white;

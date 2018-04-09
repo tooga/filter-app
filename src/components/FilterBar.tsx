@@ -4,18 +4,16 @@ import '../styles/FilterBar.css';
 
 interface FilterObject {
     name: string,
-    src: null | string
+    src: string
 }
 
 interface FilterBarProps {
     userImg: {
         originalImg: string,
         thumbnailImg: string,
-        filteredImg: string,
-        enhancedImg: string,
-        activeImg: string,
     },
-    updateImage: (src: string) => void,
+    active: boolean,
+    filterImage: (src: string) => void,
 }
 
 interface FilterBarState {
@@ -39,19 +37,23 @@ class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
 
     initFilters() {
         const initialFilters: FilterObject[] = [
-            { name: 'Normal', src: null },
-            { name: 'Inkwell', src: null },
+            { name: 'Normal', src: '' },
+            { name: 'Inkwell', src: '' },
         ];
+        // Get filters in format ./Filter.acv
         const curveFilterNames: string[] = require.context('../filter-lib/acv', false, /^\.\/.*\.acv$/).keys();
         const curveFilters: FilterObject[] = curveFilterNames.map((filterUrl: string) => {
-            // TODO fix
-            const split = filterUrl.split('/').pop();
+            // Take ./ out, leaving Filter.acv
+            const filterFileName = filterUrl.split('/').pop();
+            // Take .acv out, leaving Filter
+            const filterName = filterFileName ? filterFileName.split('.')[0] : '';
             return {
-                name: split ? split.split('.')[0] : '',
-                src: null,
+                name: filterName,
+                src: '',
             };
         });
         const filters = curveFilters.concat(initialFilters);
+        // Sort filters, put "Normal" to beginning
         filters.sort((a: FilterObject, b: FilterObject) => {
             if (a.name === 'Normal') {
                 return -1;
@@ -71,8 +73,9 @@ class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
     updateFilters() {
         let counter = 0;
         const filters = this.state.filters;
+        const thumbnailImg = this.props.userImg.thumbnailImg;
         filters.forEach((filter) => {
-            filterImage(this.props.userImg.thumbnailImg, filter.name, (src) => {
+            filterImage(thumbnailImg, filter.name, (src) => {
                 counter++;
                 filter.src = src;
                 if (filters.length === counter) {
@@ -93,8 +96,9 @@ class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
     }
 
     applyFilter(filterName: string) {
-        filterImage(this.props.userImg.originalImg, filterName, (src) => {
-            this.props.updateImage(src);
+        const originalImg = this.props.userImg.originalImg;
+        filterImage(originalImg, filterName, (src) => {
+            this.props.filterImage(src);
         });
     }
 

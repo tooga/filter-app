@@ -10,11 +10,10 @@ interface TabBarProps {
         originalImg: string,
         thumbnailImg: string,
         filteredImg: string,
-        enhancedImg: string,
-        activeImg: string,
+        editedImg: string,
     },
-    updateImage: (src: string) => void,
-    enhanceImage: (src: string) => void,
+    filterImage: (src: string) => void,
+    editImage: (src: string) => void,
 }
 
 interface TabBarState {
@@ -37,19 +36,19 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
     }
 
     render() {
-        const activeTab = this.state.activeTab;
+        const activeTabFilter = this.state.activeTab === 'filter' ? true : false;
         return (
             <div className="tab-bar">
                 <div className="tabs">
-                    <div className={'tab ' + (activeTab === 'filter' ? 'active' : '')} onClick={() => this.setActiveTab('filter')}>Filters</div>
-                    <div className={'tab ' + (activeTab === 'edit' ? 'active' : '')} onClick={() => this.setActiveTab('edit')}>Edit</div>
+                    <div className={'tab ' + (activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('filter')}>Filters</div>
+                    <div className={'tab ' + (!activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('edit')}>Edit</div>
                 </div>
                 <div className="tab-content">
-                    <div className={activeTab !== 'filter' ? 'hidden' : ''}>
-                        <FilterBar userImg={this.props.userImg} updateImage={(src: string) => this.props.updateImage(src)}/>
+                    <div className={activeTabFilter ? '' : 'hidden'}>
+                        <FilterBar active={activeTabFilter} userImg={this.props.userImg} filterImage={(src: string) => this.props.filterImage(src)}/>
                     </div>
-                    <div className={activeTab !== 'edit' ? 'hidden' : ''}>
-                        <EditBar userImg={this.props.userImg} updateImage={(src: string) => this.props.enhanceImage(src)}/>
+                    <div className={!activeTabFilter ? '' : 'hidden'}>
+                        <EditBar active={!activeTabFilter} userImg={this.props.userImg} editImage={(src: string) => this.props.editImage(src)}/>
                     </div>
                 </div>
             </div>

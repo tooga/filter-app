@@ -3,6 +3,17 @@ import { addCurves, deSaturate } from './filters';
 
 declare var Caman: any;
 
+interface EditObject {
+    name: string,
+    icon: string,
+    value: number,
+    range?: {
+        min: string,
+        max: string,
+    },
+    valueDivider?: number
+}
+
 export const filterImage = (src: string, filterName: string, cb: (dataUrl: string) => void) => {
     initCanvas(src, (canvas: HTMLCanvasElement) => {
         if (filterName === 'Gotham' || filterName === 'Inkwell') {
@@ -14,7 +25,7 @@ export const filterImage = (src: string, filterName: string, cb: (dataUrl: strin
     });
 };
 
-export const enhanceImage = (src: string, enhancements: any, cb: (dataUrl: string) => void) => {
+export const enhanceImage = (src: string, enhancements: EditObject[], cb: (dataUrl: string) => void) => {
     initCanvas(src, (canvas: HTMLCanvasElement) => {
         Caman(canvas, function(this: any, err: any) {
             enhancements.forEach((enhancement: any) => {
