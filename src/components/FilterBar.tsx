@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { filterImage } from '../filter-lib';
+import Spinner from './Spinner';
 import '../styles/FilterBar.css';
 
 interface FilterObject {
@@ -19,6 +20,7 @@ interface FilterBarProps {
 interface FilterBarState {
     filters: FilterObject[],
     activeFilter: string,
+    loadingFilter: string,
 }
 
 class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
@@ -28,6 +30,7 @@ class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
         this.state = {
             filters: [],
             activeFilter: 'Normal',
+            loadingFilter: '',
         };
     }
 
@@ -89,16 +92,20 @@ class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
     }
 
     onThumbnailClick(filterName: string) {
-        this.applyFilter(filterName);
         this.setState({
-            activeFilter: filterName,
+            loadingFilter: filterName,
         });
+        this.applyFilter(filterName);
     }
 
     applyFilter(filterName: string) {
         const originalImg = this.props.userImg.originalImg;
         filterImage(originalImg, filterName, (src) => {
             this.props.filterImage(src);
+            this.setState({
+                activeFilter: filterName,
+                loadingFilter: '',
+            });
         });
     }
 
@@ -110,7 +117,12 @@ class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
                         className={'filter-img-container ' + (this.state.activeFilter === filter.name ? 'active' : '')}
                         style={{backgroundImage: `url(${filter.src})`}}
                         onClick={() => this.onThumbnailClick(filter.name)}
-                    />
+                    >
+                        {
+                            this.state.loadingFilter === filter.name ?
+                            <Spinner /> : null
+                        }
+                    </div>
                     <div className="filter-name">{filter.name}</div>
                 </div>
             );
