@@ -190,12 +190,12 @@ class EditBar extends React.Component<EditBarProps, EditBarState> {
                             />
                         </p>
                          <div className="slider-btn-container">
-                            <i className="material-icons slider-icon" onClick={() => this.onCancelClick()}>cancel</i>
+                            <i className="material-icons slider-icon" onClick={() => this.onCancelClick()}>clear</i>
                             <div className="title-container">
+                                <div className="edit-value center">{activeEdit.value}</div>
                                 <div className="edit-title">{activeEdit.name}</div>
-                                {/*<a className="waves-effect waves-light btn-flat reset-btn" onClick={() => this.onSliderResetClick()}>Reset</a>*/}
                             </div>
-                            <i className="material-icons slider-icon" onClick={() => this.onConfirmClick()}>check_circle</i>
+                            <i className="material-icons slider-icon" onClick={() => this.onConfirmClick()}>check</i>
                         </div>
                     </div>
                 }

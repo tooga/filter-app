@@ -43,11 +43,11 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
                     <div className={'tab ' + (activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('filter')}>Filters</div>
                     <div className={'tab ' + (!activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('edit')}>Edit</div>
                 </div>
-                <div className="tab-content">
-                    <div className={activeTabFilter ? '' : 'hidden'}>
+                <div className="tab-container">
+                    <div className={'tab-content ' + (activeTabFilter ? '' : 'hidden')}>
                         <FilterBar active={activeTabFilter} userImg={this.props.userImg} filterImage={(src: string) => this.props.filterImage(src)}/>
                     </div>
-                    <div className={!activeTabFilter ? '' : 'hidden'}>
+                    <div className={'tab-content ' + (!activeTabFilter ? '' : 'hidden')}>
                         <EditBar active={!activeTabFilter} userImg={this.props.userImg} editImage={(src: string) => this.props.editImage(src)}/>
                     </div>
                 </div>

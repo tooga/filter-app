@@ -96,6 +96,10 @@
         display: flex;
         flex-direction: column;
 
+        .edit-value {
+          text-align: center;
+        }
+
         .edit-title {
           text-transform: capitalize;
           text-align: center;
@@ -120,7 +124,7 @@
 
       .slider-icon {
         color: $white;
-        font-size: 3rem;
+        font-size: 2rem;
       }
     }
 

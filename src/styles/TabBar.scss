@@ -17,10 +17,13 @@
             }
         }
     }
-    .tab-content {
+    .tab-container {
         flex: 1 1 120px;
-        .hidden {
-            display: none;
+        .tab-content {
+            height: 100%;
+            &.hidden {
+                display: none;
+            }
         }
     }
 }
