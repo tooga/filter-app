@@ -39,7 +39,6 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
         const imgUploadInput = document.getElementById('img-upload');
         if (imgUploadInput) {
             imgUploadInput.addEventListener('change', (event) => {
-                this.props.uploadLoading();
                 handleImgUpload(event, (origSrc, thumbSrc) => {
                     this.props.uploadImage(origSrc, thumbSrc);
                     this.setState({

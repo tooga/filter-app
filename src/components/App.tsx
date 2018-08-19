@@ -106,7 +106,7 @@ class App extends React.Component<{}, AppState> {
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
       link.setAttribute('href', dataUrl);
-      link.setAttribute('download', 'img.png');
+      link.setAttribute('download', 'image.png');
       document.body.appendChild(link); // Required for FF
       link.click(); // This will download the data file named "my_data.csv".
     }

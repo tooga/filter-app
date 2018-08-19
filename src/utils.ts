@@ -1,8 +1,8 @@
-export function handleImgUpload(event: any, cb: (src: string, thumbSrc: string) => void) {
+export function handleImgUpload(event: any, cb: (src: string, thumbSrc: string, error?: boolean) => void) {
     const files = event.target.files;
     const imgFile = files[0];
     if (!imgFile.type.match(/image.*/)) {
-        // this file is not an image.
+        return;
     }
     const reader = new FileReader();
     reader.onload = (e: any) => {
