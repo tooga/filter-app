@@ -1,6 +1,7 @@
 import * as React from 'react';
 import FilterBar from './FilterBar';
 import EditBar from './EditBar';
+import { handleImgUpload } from '../utils';
 import '../styles/TabBar.css';
 
 type tabs = 'filter' | 'edit';
@@ -14,10 +15,14 @@ interface TabBarProps {
     },
     filterImage: (src: string) => void,
     editImage: (src: string) => void,
+    uploadImage: (origSrc: string, thumbSrc: string) => void,
+    saveImage: () => void,
+    uploadLoading: () => void,
 }
 
 interface TabBarState {
     activeTab: tabs,
+    initFilters: boolean,
 }
 
 class TabBar extends React.Component<TabBarProps, TabBarState> {
@@ -26,7 +31,36 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
         super(props);
         this.state = {
             activeTab: 'filter',
+            initFilters: false,
         };
+    }
+
+    componentDidMount() {
+        const imgUploadInput = document.getElementById('img-upload');
+        if (imgUploadInput) {
+            imgUploadInput.addEventListener('change', (event) => {
+                this.props.uploadLoading();
+                handleImgUpload(event, (origSrc, thumbSrc) => {
+                    this.props.uploadImage(origSrc, thumbSrc);
+                    this.setState({
+                        initFilters: true,
+                    });
+                });
+            }, false);
+        }
+        if (this.state.initFilters) {
+            this.setState({
+                initFilters: false,
+            });
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.state.initFilters) {
+            this.setState({
+                initFilters: false,
+            });
+        }
     }
 
     setActiveTab(tab: tabs) {
@@ -37,15 +71,23 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
 
     render() {
         const activeTabFilter = this.state.activeTab === 'filter' ? true : false;
+        const initFilters = this.state.initFilters;
         return (
             <div className="tab-bar">
-                <div className="tabs">
-                    <div className={'tab ' + (activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('filter')}>Filters</div>
-                    <div className={'tab ' + (!activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('edit')}>Edit</div>
+                <div className="action-bar">
+                    <div className="upload-btn-wrapper">
+                        <div className="upload-btn">New</div>
+                        <input id="img-upload" type="file"/>
+                    </div>
+                    <div className="tabs">
+                        <div className={'tab ' + (activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('filter')}>Filters</div>
+                        <div className={'tab ' + (!activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('edit')}>Edit</div>
+                    </div>
+                    <div onClick={this.props.saveImage}>Save</div>
                 </div>
                 <div className="tab-container">
                     <div className={'tab-content ' + (activeTabFilter ? '' : 'hidden')}>
-                        <FilterBar active={activeTabFilter} userImg={this.props.userImg} filterImage={(src: string) => this.props.filterImage(src)}/>
+                        <FilterBar initFilters={initFilters} userImg={this.props.userImg} filterImage={(src: string) => this.props.filterImage(src)}/>
                     </div>
                     <div className={'tab-content ' + (!activeTabFilter ? '' : 'hidden')}>
                         <EditBar active={!activeTabFilter} userImg={this.props.userImg} editImage={(src: string) => this.props.editImage(src)}/>

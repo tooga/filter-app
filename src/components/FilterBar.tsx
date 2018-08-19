@@ -13,7 +13,7 @@ interface FilterBarProps {
         originalImg: string,
         thumbnailImg: string,
     },
-    active: boolean,
+    initFilters: boolean,
     filterImage: (src: string) => void,
 }
 
@@ -36,6 +36,12 @@ class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
 
     componentDidMount() {
         this.initFilters();
+    }
+
+    componentWillReceiveProps() {
+        if (this.props.initFilters) {
+            this.initFilters();
+        }
     }
 
     initFilters() {

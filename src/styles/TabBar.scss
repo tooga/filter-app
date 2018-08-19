@@ -1,19 +1,49 @@
 @import 'variables.scss';
 
 .tab-bar {
-    height: 172px;
+    flex: 0 0 172px;
     color: $white;
     display: flex;
     flex-direction: column;
-    .tabs {
+
+    .action-bar {
         display: flex;
         justify-content: center;
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 16px 8px;
-            &.active {
-                border-bottom: 2px solid $lightBlue;
+        align-items: center;
+        flex: 1 0 auto;
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+
+            .upload-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: green;
+            }
+            
+            input[type=file] {
+                font-size: 100px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+            }
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex: 1 0 auto;
+            .tab {
+                flex: 1;
+                text-align: center;
+                padding: 16px 8px;
+                &.active {
+                    border-bottom: 2px solid $lightBlue;
+                }
             }
         }
     }
