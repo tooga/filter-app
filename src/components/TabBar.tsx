@@ -75,15 +75,25 @@ class TabBar extends React.Component<TabBarProps, TabBarState> {
         return (
             <div className="tab-bar">
                 <div className="action-bar">
-                    <div className="upload-btn-wrapper">
-                        <div className="upload-btn">New</div>
+                    <div className="upload-btn-container">
+                        <div className="upload-btn-wrapper">
+                            <div className="upload-btn">
+                                <i className="material-icons">add_photo_alternate</i>
+                            </div>
+                            <div className="btn-text">New</div>
+                        </div>
                         <input id="img-upload" type="file"/>
                     </div>
                     <div className="tabs">
                         <div className={'tab ' + (activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('filter')}>Filters</div>
                         <div className={'tab ' + (!activeTabFilter ? 'active' : '')} onClick={() => this.setActiveTab('edit')}>Edit</div>
                     </div>
-                    <div onClick={this.props.saveImage}>Save</div>
+                    <div className="save-btn-wrapper" onClick={this.props.saveImage}>
+                        <div className="save-btn">
+                            <i className="material-icons">save</i>
+                        </div>
+                        <div className="btn-text">Save</div>
+                    </div>
                 </div>
                 <div className="tab-container">
                     <div className={'tab-content ' + (activeTabFilter ? '' : 'hidden')}>

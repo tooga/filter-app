@@ -12,16 +12,50 @@
         align-items: center;
         flex: 1 0 auto;
 
-        .upload-btn-wrapper {
+        .upload-btn-container {
             position: relative;
             overflow: hidden;
             display: inline-block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -32px;
+            margin-left: 8px;
+            height: 78px;
+            width: 52px;
 
-            .upload-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: green;
+            &:hover, &:active, &:focus {
+                .upload-btn-wrapper .upload-btn {
+                    opacity: 1
+                }
+                .upload-btn-wrapper .btn-text {
+                    opacity: 1
+                }
+            }
+
+            .upload-btn-wrapper {
+                text-align: center;
+
+                .upload-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: green;
+                    flex: 1 0 auto;
+                    width: 52px;
+                    height: 52px;
+                    margin-bottom: 6px;
+                    border-radius: 26px;
+                    opacity: 0.8;
+                    transition: opacity .2s;
+                    cursor: pointer;
+                }
+
+                .btn-text {
+                    font-size: 12px;
+                    color: #ccc;
+                    opacity: 0;
+                }
             }
             
             input[type=file] {
@@ -33,10 +67,49 @@
             }
         }
 
+        .save-btn-wrapper {
+            margin-right: 8px;
+            margin-top: -32px;
+            text-align: center;
+
+            .save-btn {
+                height: 52px;
+                width: 52px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 6px;
+                border-radius: 26px;
+                background-color: red;
+                position: relative;
+                opacity: 0.8;
+                transition: opacity .2s;
+                cursor: pointer;
+
+                &:hover, &:active, &:focus {
+                    opacity: 1
+                }
+            }
+
+            .btn-text {
+                font-size: 12px;
+                color: #ccc;
+                opacity: 0;
+            }
+
+
+            &:hover, &:active, &:focus {
+                .btn-text {
+                    opacity: 1;
+                }
+            }
+        }
+
         .tabs {
             display: flex;
             justify-content: center;
             flex: 1 0 auto;
+            padding: 0 8px;
             .tab {
                 flex: 1;
                 text-align: center;
